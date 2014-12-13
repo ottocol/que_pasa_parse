@@ -13,12 +13,14 @@
 </head>
 
 <body>
-  <div data-role="page">
+  <div data-role="page" id="principal">
     <div data-role="header">
-        <h1>Inicio</h1>
+        <h1>Recientes</h1>
     </div>
     <div role="main" class="ui-content">
-        <p>Pantalla de inicio</p>
+      <ul data-role="listview" id="lista_recientes">
+
+      </ul>
     </div>
   </div>
 
@@ -28,6 +30,12 @@
   </script>
 
   <script src="js/mensajes.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      listarMensajesRecientes()
+    })
+  </script>
 </body>
 
 </html>
