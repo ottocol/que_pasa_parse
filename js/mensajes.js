@@ -18,9 +18,15 @@ function listarMensajesRecientes() {
 
     qMensajesRecientes.find({
         success: function (resultados) {
+            $('#lista_recientes').empty()
             for (var i = 0; i < resultados.length; i++) {
                 $('<li>')
                     .append(resultados[i].get("texto"))
+                    .append('<div class="ui-li-aside">'
+                        + resultados[i].get("fecha").toLocaleDateString()
+                        + " "
+                        + resultados[i].get("fecha").toLocaleTimeString()
+                        + '</div>')
                     .appendTo('#lista_recientes')
             }
             $('#lista_recientes').listview('refresh')
@@ -30,4 +36,22 @@ function listarMensajesRecientes() {
         }
     })
 }
+
+function enviarMensaje(texto) {
+    var mensaje = new Mensaje()
+    mensaje.set('texto', texto)
+    mensaje.save(
+        null, {
+        success: function () {
+            $('#mensaje').append('Mensaje guardado correctamente')
+        },
+        error: function () {
+            $('#mensaje').append('Error al guardar mensaje')
+        }
+    })
+}
+
+$('#boton_enviar_mensaje').click(function() {
+    enviarMensaje($('#texto_mensaje').val())
+})
 
