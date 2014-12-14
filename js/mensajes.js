@@ -10,32 +10,39 @@ var Mensaje = Parse.Object.extend({
 })
 
 
-function listarMensajesRecientes() {
+function obtenerMensajesRecientes() {
     var qMensajesRecientes = new Parse.Query(Mensaje)
     qMensajesRecientes
         .limit(2)
         .descending("fecha")
-
     qMensajesRecientes.find({
         success: function (resultados) {
-            $('#lista_recientes').empty()
-            for (var i = 0; i < resultados.length; i++) {
-                $('<li>')
-                    .append(resultados[i].get("texto"))
-                    .append('<div class="ui-li-aside">'
-                        + resultados[i].get("fecha").toLocaleDateString()
-                        + " "
-                        + resultados[i].get("fecha").toLocaleTimeString()
-                        + '</div>')
-                    .appendTo('#lista_recientes')
-            }
-            $('#lista_recientes').listview('refresh')
+           mostrarMensajesRecientes(resultados)
         },
         error: function () {
 
         }
     })
 }
+
+function mostrarMensajesRecientes(mensajes) {
+    $('#lista_recientes').empty()
+    for (var i = 0; i < mensajes.length; i++) {
+        $('<li>')
+            .append('<h1>' + mensajes[i].get("texto") + '</h1>')
+            .append('<div class="ui-li-aside">'
+            + mensajes[i].get("fecha").toLocaleDateString()
+            + " "
+            + mensajes[i].get("fecha").toLocaleTimeString()
+            + '</div>')
+            .appendTo('#lista_recientes')
+    }
+    $('#lista_recientes').listview('refresh')
+}
+
+$(document).onPage( "show", '#principal', function () {
+    obtenerMensajesRecientes()
+})
 
 function enviarMensaje(texto) {
     var mensaje = new Mensaje()
