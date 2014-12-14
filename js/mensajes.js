@@ -28,13 +28,15 @@ function obtenerMensajesRecientes() {
 function mostrarMensajesRecientes(mensajes) {
     $('#lista_recientes').empty()
     for (var i = 0; i < mensajes.length; i++) {
+        var mensaje_tmpl = '<h1>{{texto}}</h1>'
+            + '<div class="ui-li-aside"> {{fecha_hora}} </div> '
+        var datos = {
+            fecha_hora: mensajes[i].get("fecha").toLocaleDateString() +
+                        mensajes[i].get("fecha").toLocaleTimeString(),
+            texto:mensajes[i].get("texto")
+        }
         $('<li>')
-            .append('<h1>' + mensajes[i].get("texto") + '</h1>')
-            .append('<div class="ui-li-aside">'
-            + mensajes[i].get("fecha").toLocaleDateString()
-            + " "
-            + mensajes[i].get("fecha").toLocaleTimeString()
-            + '</div>')
+            .append(Mustache.render(mensaje_tmpl, datos))
             .appendTo('#lista_recientes')
     }
     $('#lista_recientes').listview('refresh')
