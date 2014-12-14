@@ -47,8 +47,17 @@ $(document).onPage( "show", '#mensajes', function () {
 })
 
 function enviarMensaje(texto) {
+    var usuActual = Parse.User.current();
+    if (usuActual==null)
+        return;
     var mensaje = new Mensaje()
     mensaje.set('texto', texto)
+
+    //Todos pueden leer el mensaje, solo el usuario que lo crea puede modificarlo
+    var mensajeACL = new Parse.ACL(usuActual)
+    mensajeACL.setPublicReadAccess(true)
+    mensaje.setACL(mensajeACL)
+
     mensaje.save(
         null, {
         success: function () {
