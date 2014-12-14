@@ -31,8 +31,8 @@ function mostrarMensajesRecientes(mensajes) {
         var mensaje_tmpl = '<h1>{{texto}}</h1>'
             + '<div class="ui-li-aside"> {{fecha_hora}} </div> '
         var datos = {
-            fecha_hora: mensajes[i].get("fecha").toLocaleDateString() +
-                        mensajes[i].get("fecha").toLocaleTimeString(),
+            fecha_hora: mensajes[i].get("fecha").toLocaleDateString()
+                        + " " + mensajes[i].get("fecha").toLocaleTimeString(),
             texto:mensajes[i].get("texto")
         }
         $('<li>')
