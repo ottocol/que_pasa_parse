@@ -42,7 +42,7 @@ function mostrarMensajesRecientes(mensajes) {
     $('#lista_recientes').listview('refresh')
 }
 
-$(document).onPage( "show", '#principal', function () {
+$(document).onPage( "show", '#mensajes', function () {
     obtenerMensajesRecientes()
 })
 
