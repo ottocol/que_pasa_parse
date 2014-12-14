@@ -19,6 +19,15 @@
 
 <body>
 
+  <div data-role="page" id="pantalla_login">
+    <div role="main" class="ui-content">
+      <input type="text" placeholder="Nombre de usuario..." id="campo_login">
+      <input type="text" placeholder="Contraseña..." id="campo_password">
+      <input type="button"  value="Entrar" id="boton_login">
+      <div id="mensaje_login"></div>
+    </div>
+  </div>
+
   <div data-role="page" id="mensajes">
     <div data-role="header">
         <h1>Recientes</h1>
@@ -51,10 +60,8 @@
   </script>
 
   <script src="js/mensajes.js"></script>
+  <script src="js/usuarios.js"></script>
 
-  <script>
-
-  </script>
 </body>
 
 </html>
